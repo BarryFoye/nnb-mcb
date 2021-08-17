@@ -101,3 +101,78 @@ found 0 vulnerabilities
 
 Great ... *but wait* ... looks like we have a new folder called node_modules and a new file called package-lock.json. These were auto generated during the install and for now we'll forget about them except to say that the node_modules contains our dependency "mineflayer" but also mineflayers dependencies and their dependencies and so on until all are satisfied and the package-lock.json details these dependencies. Have a look but dont alter the folder, its content or the lock file.
 
+Now we should check the status of our project as we've just added some new stuff and git may have an issue with it. Lets type ```git status``` into our shell and press enter. You should see an output like this:
+```
+On branch lesson_one
+Your branch is up to date with 'origin/lesson_one'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        package-lock.json
+
+nothing added to commit but untracked files present (use "git add" to track)
+```
+
+So this says a few things, like we're still up to date with teh remote repository, which is good! It also says that the package-lock.json file is "untracked". Thats the file that the install command just created. We don't want to track this file so lets add it to the .gitignore file so git knows not to track it at all. 
+
+Open up the .gitignore file and scroll to the bottom, should be line 104. Lets go to line 106 and add a comment using the # we learned about. Add the following:
+
+```
+# Packages
+```
+Now on line 107 lets add the file name so git will see it in this file and ignore it totally. So add the following:
+```
+package-lock.json
+```
+So you should end up with:
+```
+# Packages
+package-lock.json
+```
+
+Save the file. All done, nothing left to do, totally complete, we're good... Now let's confirm this assumption with another check of the status of git. type ```git status``` into your shell and hey presto....ooooooh, now we see a new message like this:
+```
+On branch lesson_one
+Your branch is up to date with 'origin/lesson_one'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   .gitignore
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+Oh yeah we modified the .gitignore file and git is tracking that and has noticed the modification. Okiedokie we can sort that. Lets look at the message, so we're still up to date with the remote, *buíochas le Dia*, but we have a message saying we have changes but that they are not "staged" for "commit"? Briefly, git keeps a record of all changes in chronological order and a change can be "staged" with other changes and "commit"ed to this chronological list. To stage a change or changes we type ```git add``` followed by the files names which have changes which you'd like to commit. For simplicity sake we are going to use the dot shortcut to say add "all" changes for the next commit. So type ```git add .``` into your shell. Now check the status again by typing ```git status``` and you should now see:
+```
+On branch lesson_one
+Your branch is up to date with 'origin/lesson_one'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   .gitignore
+```
+
+Nice, the branch is still up to date and now we have staged our change...now we need to commit this change to gits change log (remember that chronological list...thats gits change log!). 
+
+When making a commit it is required to add a message to it, like a little memory of why you made a certain change. We can do this a few different ways but for now we'll do it in the shell. the commit command is ```git commit```, but if we do this on its own, git will complain about the commit message being empty. To solve this we use a thing called a command line arguement also known as a flag. In this case the flagis -m meaning message and then in "quotes" we type the message. git will see this a bit like a key:value pair, the flag being the key and the "message in quotes" as the value (-m:"a message" for example). but on the command line in the shell we type it like this:
+```bash
+git commit -m "added package-lock to ignore file"
+```
+give it a try and feel free to modiffy the message if you think it could be clearer. Remember these messages are so that you can remember the commit and why. Once you hit enter you'll see something similar to this:
+```
+[lesson_one 827d19c] added package-lock to ignore file
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+ ```
+Now we're done....*wait*...we need to check ```git status``` to make sure. Go ahead and enter ```git status```. Booooooo, whats this new message:
+```
+On branch lesson_one
+Your branch is ahead of 'origin/lesson_one' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+```
+
+Now we're ahead of origin? Whaaaat? Oh wait that's right, we made a change here, locally and we need to push that to our remote repository so that other people using our code has the latest changes!
+
+ Our final step for this is to simply push our change. It can be a bit more complex but we're keeping it simple here. To push our change we use ```git push```! and thats it. Give it a try and see. The output will show progress information like enumerating, counting, compression, writing and completion. If you get any errors :eyes:, you're on your own :running:.
