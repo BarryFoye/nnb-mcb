@@ -1,0 +1,23 @@
+{
+  "name": "nnb-mcb",
+  "version": "1.0.0",
+  "description": "Simple minecraft bot",
+  "main": "index.js",
+  "dependencies": {
+    "mineflayer": "^3.9.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BarryFoye/nnb-mcb.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BarryFoye/nnb-mcb/issues"
+  },
+  "homepage": "https://github.com/BarryFoye/nnb-mcb#readme"
+}
